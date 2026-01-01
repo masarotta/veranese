@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>Conlang-sanasto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      margin: 12px 0;
+    }
+
+    .result {
+      padding: 6px 0;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Sanasto</h2>
+  <input id="search" placeholder="Hae sanaa…">
+  <div id="results">Ladataan sanastoa…</div>
+
+  <script>
+    let dictionary = {};
+
+    fetch("./sanasto.json")
+      .then(response => {
+        if (!response.ok) throw new Error("JSON ei latautunut");
+        return response.json();
+      })
+      .then(data => {
+        dictionary = data;
+        showResults("");
+      })
+      .catch(err => {
+        document.getElementById("results").textContent =
+          "Sanastoa ei voitu ladata.";
+        console.error(err);
+      });
+
+    document.getElementById("search").addEventListener("input", e => {
+      showResults(e.target.value.toLowerCase());
+    });
+
+    function showResults(query) {
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+
+      for (const word in dictionary) {
+        if (word.toLowerCase().includes(query)) {
+          const div = document.createElement("div");
+          div.className = "result";
+          div.textContent = `${word} = ${dictionary[word]}`;
+          results.appendChild(div);
+        }
+      }
+
+      if (!results.children.length) {
+        results.textContent = "Ei tuloksia.";
+      }
+    }
+  </script>
+
+</body>
+</html>
