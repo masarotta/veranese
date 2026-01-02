@@ -1,8 +1,18 @@
 {
-  "luma": "valo",
-  "nera": "mieli",
-  "keth": "kivi",
-  "sai": "vesi",
-  "mora": "liike"
+  "kysymys": "aruno",
+  "olla / on": "ista",
+  "kyllä": "jas",
+  "ei": "nej"
+  "mutta": "ei"
+  "ja / sekä": "ei"
+  "todella": "ei"
+  "että": "eetta"
+  "mitä / mikä": "vatt"
+  "moku": "tehdä"
+  "minä": "mono"
+  "sinä": "sono"
+  "hän": "vono"
+  "me": "monot"
+  "te": "sonot"
+  "he": "vonot"
 }
-
